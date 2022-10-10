@@ -42,7 +42,7 @@ def sign(value):
 
 """Implements /src/GameMap/index.ts"""
 
-
+rng_values = [  get_n_values(i, N=1000000) for i in range(16) ]
 class GameMap:
     def __init__(self, configs):
         """
@@ -66,10 +66,10 @@ class GameMap:
         
         def js_rng(seed):
             idx = 0
-            rng_values = get_n_values(seed, N=1000000)
+            
             def _rng():
                 nonlocal idx
-                ret = rng_values[idx]
+                ret = rng_values[seed][idx]
                 idx += 1
                 return ret
             return Namespace(**dict(random=_rng))
